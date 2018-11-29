@@ -1,0 +1,19 @@
+<% sessionid = session[:id]
+@user = User.find(sessionid) 
+@posts = Post.where(user_id: Connection.pluck(:follower_id))
+ %>
+Welcome <%= @user.first %>! Session ID: <%= session[:id] %><br>
+<h3>Tweets</h3>
+<ul class="collection">
+ <% @posts = @posts.order(created_at: :desc)
+   @posts.each do |post| 
+    @user = User.find(post.user_id) %>
+    <li class="collection-item avatar">
+      <span class="title"><%= @user.screenname %></span>
+        <p> <%= post.message %>
+      </p>
+    </li>
+<% end %>
+</ul>
+
+<a href="/posts">Back to Home</a>

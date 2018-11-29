@@ -1,0 +1,21 @@
+<h3>All Users</h3>
+<% sessionid = session[:id]
+if sessionid != nil
+    @user = User.find(sessionid)  %>
+    Welcome <%= @user.first %>! Session ID: <%= session[:id] %>
+
+<% end %>
+
+<ul class="collection">
+<% @users.each do |user| %>
+    <li class="collection-item avatar">
+      <span class="title"><%= user.screenname %></span>
+      <p><%= user.first %> <%= user.last %><br>
+         <%= user.email %> - pass: <%= user.password %>ID= <%= user.id %>
+      </p>
+      
+    </li>
+<% end %>
+</ul>
+
+<a href="/tweets">Back to Home</a>
